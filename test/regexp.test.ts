@@ -17,4 +17,9 @@ describe("Regexp email validation", () => {
         const result = validator.validate("@example");
         return expect(result).resolves.toEqual({ valid: false, reason: "REGEX_MISMATCH" });
     });
+
+    it("rejects an email with invalid characters", () => {
+        const result = validator.validate("$$$$$@example");
+        return expect(result).resolves.toEqual({ valid: false, reason: "REGEX_MISMATCH" });
+    });
 });
