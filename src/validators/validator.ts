@@ -10,5 +10,5 @@ export type ValidationError = {
 export type ValidationResult = ValidationSuccess | ValidationError;
 
 export interface EmailValidator {
-    validate(emailAddress: string): ValidationResult;
+    validate(emailAddress: string): Promise<ValidationResult>;
 }

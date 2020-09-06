@@ -5,16 +5,16 @@ describe("Regexp email validation", () => {
 
     it("passes validation for correct email address", () => {
         const result = validator.validate("somebody@example.com");
-        expect(result.valid).toBe(true);
+        return expect(result).resolves.toEqual({ valid: true });
     });
 
     it("rejects an email without domain zone", () => {
         const result = validator.validate("somebody@example");
-        expect(result).toEqual({ valid: false, reason: "REGEX_MISMATCH" });
+        return expect(result).resolves.toEqual({ valid: false, reason: "REGEX_MISMATCH" });
     });
 
     it("rejects an email without local part", () => {
         const result = validator.validate("@example");
-        expect(result).toEqual({ valid: false, reason: "REGEX_MISMATCH" });
+        return expect(result).resolves.toEqual({ valid: false, reason: "REGEX_MISMATCH" });
     });
 });
