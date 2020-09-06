@@ -38,4 +38,19 @@ describe("POST /email/validate", () => {
             }
         });
     });
+
+    it("fails validation for invalid email address", async () => {
+        const res = await validateRequest()
+            .send({email: "somebody@example.com"})
+            .expect(200);
+
+        return assert.deepStrictEqual(res.body, {
+            valid: false,
+            validators: {
+                domain: {valid: true},
+                regexp: {valid: true},
+                smtp: {valid: false, reason: "Could not resolve any IP addresses for the MX server for example.com"}
+            }
+        });
+    });
 });
