@@ -33,6 +33,7 @@
         "express": "^4.17.1",
         "express-validator": "^6.2.0",
         "lodash": "^4.17.19",
+        "mx-connect": "^1.2.0",
         "tldjs": "^2.3.1",
         "winston": "^3.2.1"
     },
