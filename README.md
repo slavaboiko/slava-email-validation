@@ -19,4 +19,10 @@ curl -XPOST -d '{"email":"xxx@yyy.zzz"}' http://localhost:8080/email/validate
 
  - `regexp` - checks email against https://emailregex.com/
  - `domain` - checks email domain with known TLDs
- - `smtp` - tries to connect to SMTP server if MX records are found 
+ - `smtp` - tries to connect to SMTP server if MX records are found
+ 
+ 
+ ## Known Issues / ToDo
+ 
+  - add integration tests with github workflows that check against running docker instance
+  - fix smtp validator to fail if MX records are not found instead of timing out
