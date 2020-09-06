@@ -1,30 +1,41 @@
 import request from "supertest";
 import app from "../src/app";
+import assert = require("assert");
 
 describe("POST /email/validate", () => {
 
     const validateRequest = () => request(app).post("/email/validate");
 
-    it("should return 200 OK", () => {
-        return validateRequest()
-            .expect(200);
-    });
-
     it("responds 400 if email address is not present", () => {
         return validateRequest()
             .send({})
-            .expect(400, { error: "email is not specified" });
+            .expect(400, {error: "email is not specified"});
     });
 
     it("responds 400 if email address is null", () => {
         return validateRequest()
             .send({email: null})
-            .expect(400, { error: "email is not specified" });
+            .expect(400, {error: "email is not specified"});
     });
 
     it("responds 400 if email address is empty", () => {
         return validateRequest()
             .send({email: ""})
-            .expect(400, { error: "email cannot be empty string" });
+            .expect(400, {error: "email cannot be empty string"});
+    });
+
+    it("passes validation for valid email address", async () => {
+        const res = await validateRequest()
+            .send({email: "slava.boiko@outlook.com"})
+            .expect(200);
+
+        return assert.deepStrictEqual(res.body, {
+            valid: true,
+            validators: {
+                domain: {valid: true},
+                regexp: {valid: true},
+                smtp: {valid: true}
+            }
+        });
     });
 });
