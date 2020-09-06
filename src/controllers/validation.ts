@@ -1,6 +1,6 @@
 "use strict";
 
-import { Response, Request, NextFunction } from "express";
+import {Request, Response} from "express";
 
 
 export const emailValidation = (req: Request, res: Response) => {

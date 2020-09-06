@@ -13,7 +13,7 @@ export interface EmailValidator {
     validate(emailAddress: string): Promise<ValidationResult>;
 }
 
-export const validationSuccess: ValidationSuccess = { valid: true };
+export const validationSuccess: ValidationSuccess = {valid: true};
 
 export const validationError = (reason: string): ValidationError => {
     return {
