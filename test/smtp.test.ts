@@ -11,6 +11,14 @@ describe("SMTP email validation", () => {
         });
     });
 
+    it("fails validation for non existing domain", () => {
+        const result = validator.validate("somebody@dsfsdflksjdlkfjlsdkfjlsdfj.com");
+        return expect(result).resolves.toEqual({
+            valid: false,
+            reason: "CONNECTION_TIMEOUT"
+        });
+    });
+
     it("passes validation for valid email address", () => {
         const result = validator.validate("slava.boiko@outlook.com");
         return expect(result).resolves.toEqual({valid: true});
